@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="https://js.puter.com/v2/"></script>
+<title>OmniMind — бесплатный ИИ-чат с фото: решает задачи, пишет код</title>
+<meta name="description" content="OmniMind — бесплатный ИИ-чат без ключей. Решает примеры по фото, пишет код, тексты и переводы. Несколько нейросетей, режим сравнения, Premium.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://morozmaxim607-tech.github.io/omnimind/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OmniMind — ИИ-чат, который решает задачи по фото">
+<meta property="og:description" content="Бесплатный ИИ без ключей: код, математика по фото, тексты, переводы.">
+<meta property="og:url" content="https://morozmaxim607-tech.github.io/omnimind/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OmniMind","url":"https://morozmaxim607-tech.github.io/omnimind/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Бесплатный ИИ-чат: решает задачи по фото, пишет код и тексты.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+:root{--pk:#ff7ac6;--cy:#7df3ff;--lv:#b08cff;--tx:#fff;--mut:#c9b8f0;--gl:rgba(255,255,255,.09);--ln:rgba(255,255,255,.18)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{color:var(--tx);font:16px/1.5 system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 15% 10%,#6b2d9c55,transparent 45%),radial-gradient(circle at 90% 90%,#ff7ac644,transparent 40%),linear-gradient(160deg,#1a1033,#261552 60%,#1b1240);overflow:hidden}
+button,select,textarea,input{font:inherit;color:var(--tx);background:var(--gl);border:1px solid var(--ln);border-radius:14px;padding:9px 13px}
+button{cursor:pointer}option{color:#000}
+.p{background:linear-gradient(90deg,var(--pk),var(--lv));border:0;font-weight:700;box-shadow:0 0 16px #ff7ac655}
+#app{display:flex;height:100dvh}
+#side{width:280px;flex:none;display:flex;flex-direction:column;gap:10px;padding:14px;background:#140b2df0;border-right:1px solid var(--ln)}
+.brand{font-weight:800;font-size:22px;background:linear-gradient(90deg,var(--pk),var(--cy));-webkit-background-clip:text;color:transparent}
+#list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+.it{display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:12px;cursor:pointer;color:var(--mut);font-size:15px}
+.it span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.it:hover,.it.on{background:var(--gl);color:#fff}
+.it b{opacity:.6;font-weight:400;padding:0 4px}
+.foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--ln);padding-top:10px}
+#who{font-size:14px;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+#main{flex:1;min-width:0;display:flex;flex-direction:column;height:100dvh}
+.top{display:flex;gap:8px;padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top));align-items:center}
+.top select{flex:1;min-width:0}#bMenu{display:none}
+#chat{flex:1;overflow-y:auto;padding:8px 14px;display:flex;flex-direction:column;gap:14px;max-width:860px;width:100%;margin:0 auto}
+.m{max-width:88%;padding:11px 15px;border-radius:18px;white-space:pre-wrap;word-wrap:break-word}
+.u{align-self:flex-end;background:linear-gradient(135deg,var(--pk),var(--lv));border-bottom-right-radius:6px}
+.a{align-self:flex-start;background:var(--gl);border:1px solid var(--ln);border-bottom-left-radius:6px}
+.a small{display:block;color:var(--cy);font-weight:700;margin-bottom:3px}.err{border-color:#ff6b8a}
+.m img{max-width:100%;max-height:260px;border-radius:12px;display:block;margin-bottom:6px}
+pre{background:#0c0720;padding:10px;border-radius:10px;overflow-x:auto;margin:6px 0}code{background:#0c072099;padding:1px 5px;border-radius:5px}pre code{background:none;padding:0}
+.hero{margin:auto;text-align:center;padding:20px;max-width:520px}
+.hero .ms{font-size:64px;filter:drop-shadow(0 0 18px var(--pk))}
+.hero h1{margin:4px 0;font-size:34px;background:linear-gradient(90deg,var(--pk),var(--cy));-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--mut)}.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}.chips button{font-size:14px}
+#st{text-align:center;color:var(--cy);font-size:14px;min-height:18px}
+#pv{max-width:860px;width:100%;margin:0 auto;padding:0 14px}#pv img{height:64px;border-radius:10px;border:2px solid var(--pk)}#pv button{padding:2px 9px;margin-left:6px}
+.in{display:flex;gap:8px;max-width:860px;width:100%;margin:0 auto;padding:6px 14px;padding-bottom:max(12px,env(safe-area-inset-bottom));align-items:flex-end}
+.in textarea{flex:1;resize:none;height:50px;max-height:140px;border-radius:22px}
+.in label,.in button{height:50px;min-width:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0;cursor:pointer;background:var(--gl);border:1px solid var(--ln)}
+.in .p{border:0;background:linear-gradient(135deg,var(--pk),var(--lv))}
+dialog{background:#241447;color:#fff;border:1px solid var(--ln);border-radius:20px;max-width:380px;width:92%;box-shadow:0 0 40px #ff7ac655}
+dialog::backdrop{background:#000b}dialog input{width:100%;margin:6px 0}dialog h3{margin:0 0 8px}
+.row{display:flex;gap:8px;margin:8px 0}.row>*{flex:1}.mut{color:var(--mut);font-size:14px}
+#shade{display:none}
+@media(max-width:760px){
+ #side{position:fixed;z-index:20;left:0;top:0;bottom:0;transform:translateX(-102%);transition:.25s;width:82%;max-width:320px}
+ #side.open{transform:none}#side.open+#shade{display:block;position:fixed;inset:0;background:#0009;z-index:15}
+ #bMenu{display:block}.m{max-width:94%}}
+#srch{width:100%;border-radius:12px;padding:8px 12px;font-size:14px}
+.tabs{display:flex;gap:6px}.tabs button{flex:1;padding:6px;font-size:13px;border-radius:10px}.tabs .on{background:linear-gradient(90deg,var(--pk),var(--lv));border:0;font-weight:700}
+.gr{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);opacity:.7;padding:8px 6px 2px}
+.it{min-height:40px;transition:background .15s}.it b{cursor:pointer;border-radius:8px;padding:2px 5px;opacity:.55}.it b:hover{opacity:1;background:#fff2}
+.prof{display:flex;align-items:center;gap:8px;text-align:left;width:100%}.prof span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.foot .row{margin:0}.foot a{text-align:center;color:var(--cy);text-decoration:none;font-size:14px}
+#side{transition:transform .28s cubic-bezier(.4,0,.2,1)}
+[hidden]{display:none!important}
+#side{background:#0f0a1f;padding:10px;gap:4px;border-right:1px solid #ffffff0f}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 10px}
+.ib{padding:4px 10px;border-radius:10px;background:transparent;border:0;font-size:18px;color:var(--mut)}.ib:hover{background:#ffffff12}
+.nav{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:10px;padding:9px 10px;color:#e8defc}
+.nav:hover,.nav.on{background:#ffffff12}.nav i,.srch i{font-style:normal;width:20px;text-align:center}
+#nc{border:1px solid #ff7ac655;background:linear-gradient(90deg,#ff7ac620,#b08cff20);font-weight:600}
+.srch{display:flex;align-items:center;gap:10px;padding:0 10px;border-radius:10px;background:#ffffff0d;margin:2px 0}
+.srch input{flex:1;border:0;background:transparent;padding:9px 0;border-radius:0;min-width:0;font-size:14px}.srch input:focus{outline:0}
+.it{position:relative;border-radius:10px;padding:8px 10px}.it.on{background:#ffffff14;box-shadow:inset 3px 0 0 var(--pk)}
+.it .dots{opacity:0;padding:0 6px;font-size:18px;line-height:1}.it:hover .dots,.it.on .dots{opacity:.85}@media(hover:none){.it .dots{opacity:.7}}
+.foot{border-top:1px solid #ffffff12;position:relative;padding-top:8px;gap:0}
+.prof{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;border-radius:12px;padding:8px;text-align:left}.prof:hover{background:#ffffff12}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--lv));display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.prof span{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pm{position:absolute;z-index:40;min-width:190px;background:#1d1238;border:1px solid var(--ln);border-radius:14px;padding:6px;box-shadow:0 12px 40px #000a}
+.foot .pm{left:0;right:0;bottom:58px}#cm{position:fixed}
+.pm button,.pm a{display:block;width:100%;text-align:left;background:transparent;border:0;border-radius:9px;padding:9px 10px;color:#fff;text-decoration:none;font-size:14px}.pm button:hover,.pm a:hover{background:#ffffff14}.pm .dng{color:#ff8fa8}
+@media(min-width:761px){#side{width:268px;transition:width .25s,padding .25s}.side-c #side{width:0;padding:0;overflow:hidden;border:0}.side-c #bMenu{display:block}}
+body{background:#000}#side{background:#0b0b0b}
+.top{padding:10px 14px;gap:8px}
+.sq{width:44px;height:44px;border-radius:14px;background:#212121;border:0;padding:0;display:flex;align-items:center;justify-content:center;flex:none}
+#bMenu,#bNew,.side-c #bMenu{display:flex}
+.top select{height:44px;border-radius:22px;background:#212121;border:0;font-size:14px;font-weight:600;padding:0 12px}
+.in{gap:10px;align-items:flex-end}
+.in label{background:#212121;border:0;width:50px;flex:none}
+.in .pill{flex:1;min-width:0;display:flex;align-items:flex-end;gap:4px;background:#212121;border-radius:26px;padding:6px 6px 6px 18px;min-height:50px}
+.in .pill textarea{flex:1;min-width:0;border:0;background:transparent;border-radius:0;height:38px;padding:8px 0;font-size:16px}.in .pill textarea:focus{outline:0}
+.in .pill button{height:38px;min-width:38px;border-radius:50%;padding:0;border:0;background:transparent;display:flex;align-items:center;justify-content:center}
+.in .pill .p{background:#fff;color:#000;font-size:20px;font-weight:700;box-shadow:none}.in .pill button:disabled{opacity:.4}.in .pill .rec{background:#ff4d6d}
+#sug{display:flex;gap:10px;overflow-x:auto;padding:4px 14px 10px;max-width:860px;width:100%;margin:0 auto;scrollbar-width:none}#sug::-webkit-scrollbar{display:none}
+#sug button{flex:none;width:72%;max-width:300px;text-align:left;background:#212121;border:0;border-radius:22px;padding:14px 18px;font-size:15px;line-height:1.35}
+#sug b{display:block}#sug span{color:#8e8e8e}
+</style>
+</head>
+<body>
+<div id="app">
+ <aside id="side">
+  <div class="sh"><div class="brand">🌸 OmniMind</div><button id="bCol" class="ib" title="Свернуть меню">«</button></div>
+  <button id="nc" class="nav"><i>＋</i><span>Новый чат</span></button>
+  <div class="srch"><i>🔎</i><input id="srch" type="search" placeholder="Поиск по чатам" autocomplete="off"></div>
+  <button id="tFav" class="nav"><i>☆</i><span>Избранные чаты</span></button>
+  <div id="list"></div>
+  <div class="foot">
+   <div id="pm" class="pm" hidden><button id="mProf">👤 Профиль</button><button id="bSet">⚙ Настройки</button><button id="bPrem">★ Premium</button><a id="bAdm" href="/admin.html" hidden>🛠 Админ-панель</a><button id="bAuth">Войти</button></div>
+   <button id="bProf" class="prof"><b class="av" id="av">?</b><span id="who"></span><i style="font-style:normal">⋯</i></button>
+  </div>
+ </aside>
+ <div id="shade"></div>
+ <div id="cm" class="pm" hidden><button data-a="fav">☆ В избранное</button><button data-a="ren">✎ Переименовать</button><button data-a="del" class="dng">🗑 Удалить</button></div>
+ <section id="main">
+  <div class="top">
+   <button id="bMenu" class="sq" title="Меню"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 9h18M4 17h11" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+   <select id="model"></select>
+   <select id="mode">
+    <option value="chat">💬 Чат</option><option value="math">🧮 Решатель задач</option><option value="code">👨‍💻 Программист</option>
+    <option value="write">✍️ Писатель</option><option value="tr">🌍 Переводчик</option><option value="cmp">⚖️ Сравнить 3 ИИ ★</option>
+   </select>
+   <button id="bNew" class="sq" title="Новый чат"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-6"/><path d="M17.5 3.5l3 3L12 15l-4 1 1-4z"/></svg></button>
+  </div>
+  <div id="chat"></div>
+  <div id="st"></div>
+  <div id="pv"></div>
+  <div id="sug"><button data-m="math"><b>Реши задачу</b><span>по фото из галереи</span></button><button data-p="Напиши на Python игру «Угадай число»"><b>Напиши код</b><span>игра на Python</span></button><button data-p="Объясни простыми словами, как работает интернет"><b>Объясни просто</b><span>как работает интернет</span></button><button data-p="Придумай 5 идей для стартапа"><b>Придумай идеи</b><span>для стартапа</span></button></div>
+  <div class="in">
+   <label for="file" title="Добавить фото"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 5v16M5 13h16" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></label><input type="file" id="file" accept="image/*" hidden>
+   <div class="pill"><textarea id="q" rows="1" placeholder="Спросите OmniMind"></textarea><button id="bMic" title="Голосовой ввод"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button id="bSend" class="p">↑</button></div>
+  </div>
+ </section>
+</div>
+
+<dialog id="dAuth"><h3 id="aT">Вход</h3>
+ <input id="em" type="email" placeholder="Email" autocomplete="email" autocapitalize="off" autocorrect="off">
+ <input id="pw" type="password" placeholder="Пароль (от 6 символов)" autocomplete="current-password">
+ <div class="row"><button class="p" id="aOk">Войти</button><button id="aSw">Регистрация</button></div>
+ <p class="mut" id="aE"></p><button onclick="dAuth.close()" style="width:100%">Закрыть</button></dialog>
+
+<dialog id="dPrem"><h3>★ Premium</h3>
+ <p class="mut">Все нейросети, сравнение 3 ИИ сразу, без лимита сообщений. Premium включает администратор OmniMind — напишите владельцу сервиса.</p>
+ <div id="admBox" hidden><p class="mut">Вы админ. Выдать или снять Premium любому пользователю:</p><input id="pEm" type="email" placeholder="Email пользователя" autocapitalize="off" autocorrect="off"><div class="row"><button class="p" id="pGive">Выдать</button><button id="pTake">Снять</button></div></div>
+ <p class="mut" id="pE"></p><button onclick="dPrem.close()" style="width:100%">Закрыть</button></dialog>
+
+<dialog id="dProf"><h3>👤 Профиль</h3>
+ <p class="mut">Email: <b id="pfE"></b><br>Тариф: <b id="pfP"></b><br>Использовано сегодня: <b id="pfU"></b><br>Чатов: <b id="pfN"></b></p>
+ <button onclick="dProf.close()" style="width:100%">Закрыть</button></dialog>
+<dialog id="dSet"><h3>⚙ Настройки</h3>
+ <p class="mut">Режим по умолчанию при открытии сайта</p>
+ <select id="sMode" style="width:100%"><option value="chat">💬 Чат</option><option value="math">🧮 Решатель задач</option><option value="code">👨‍💻 Программист</option><option value="write">✍️ Писатель</option><option value="tr">🌍 Переводчик</option></select>
+ <div id="keyBox" hidden><p class="mut">Ключ ИИ — необязательно (начинается с pk_). Бесплатно: enter.pollinations.ai → создать Publishable key</p><input id="sKey" type="password" placeholder="pk_…" autocapitalize="off" autocorrect="off" autocomplete="off"></div>
+ <div class="row"><button id="sClr">🗑 Удалить все чаты</button></div>
+ <button onclick="dSet.close()" style="width:100%">Закрыть</button></dialog>
+<noscript>OmniMind — бесплатный ИИ-чат: несколько нейросетей, решение задач по фото, код, тексты и переводы. Включите JavaScript.</noscript>
+
+<script>
+const FREE_LIMIT=10;
+const SYS={chat:"Ты OmniMind — умный, дружелюбный ИИ-ассистент. Отвечай на языке пользователя, чётко и кратко.",
+math:"Ты репетитор по математике, физике и другим наукам. Если на фото задача — прочитай её и реши по шагам, в конце напиши ответ. Формулы пиши простым текстом (без LaTeX).",
+code:"Ты эксперт-программист уровня senior. Пиши рабочий код в блоках ```, объясняй кратко, указывай подводные камни.",
+write:"Ты талантливый писатель и редактор. Пиши живо, грамотно и красиво.",
+tr:"Ты профессиональный переводчик. Переводи точно, сохраняя стиль; если язык не указан — между русским и английским."};
+let models=[{n:"GPT",id:"openai"},{n:"Mistral",id:"mistral"},{n:"Llama",id:"llama"},{n:"DeepSeek",id:"deepseek"},{n:"Claude",id:"claude"},{n:"Gemini",id:"gemini"}];
+const $=s=>document.querySelector(s);
+const L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const fmt=t=>esc(t).replace(/```\w*\n?([\s\S]*?)```/g,"<pre><code>$1</code></pre>").replace(/`([^`\n]+)`/g,"<code>$1</code>").replace(/\*\*([^*\n]+)\*\*/g,"<b>$1</b>");
+const norm=s=>String(s).trim().toLowerCase();
+let ME=null;const cur=()=>ME&&ME.email,isPrem=()=>!!(ME&&ME.premium);
+const api=(p,o={})=>fetch("/api/"+p,{...o,headers:{"Content-Type":"application/json","X-Requested-With":"om",...(o.headers||{})}});
+const day=()=>new Date().toISOString().slice(0,10);
+const cnt=()=>ME?ME.used:L("om_g_"+day(),0);
+let authMode="in",chats=[],cid=null,img=null,busy=false;
+const cc=()=>chats.find(c=>c.id===cid);
+async function load(){try{const r=await api("me");if([404,405,501].includes(r.status))useDirect=true;ME=r.ok?await r.json():null;if(ME){const c=await api("chats");chats=c.ok?await c.json():[]}else chats=L("om_guest",[])}catch(e){ME=null;if(location.protocol==="file:")useDirect=true;chats=L("om_guest",[])}if(useDirect&&!ME){const e=L("om_lcur",null);if(e&&L("om_lusers",{})[e]){ME={email:e,premium:false,admin:false,used:0,limit:10,local:true};chats=L("om_ch_"+e,[])}}cid=chats[0]?chats[0].id:null;ui()}
+const strip=()=>chats.slice(0,40).map(c=>({...c,msgs:c.msgs.slice(-60).map(m=>m.img?{...m,img:null,hadImg:1}:m)}));
+let svT=0;function save(){if(!cur()){S("om_guest",strip());return}if(ME.local){S("om_ch_"+ME.email,strip());return}clearTimeout(svT);svT=setTimeout(()=>api("chats",{method:"PUT",body:JSON.stringify(strip())}).catch(()=>{}),400)}
+function newChat(){const c={id:Date.now(),title:"Новый чат",msgs:[]};chats.unshift(c);cid=c.id;return c}
+
+function ui(){
+ const u=cur(),pr=isPrem();
+ $("#who").textContent=u?(pr?"★ ":"")+u:"Гость";$("#av").textContent=u?u[0].toUpperCase():"?";$("#bPrem").hidden=useDirect;
+ $("#bAuth").textContent=u?"Выйти":"Войти / Регистрация";$("#bAdm").hidden=!(ME&&ME.admin);
+ $("#bPrem").textContent=pr?"★ Premium активен":"★ Premium";
+ const sel=$("#model"),old=sel.value;
+ sel.innerHTML=models.map((m,i)=>`<option value="${esc(m.id)}">${esc(m.n)}${i>0&&!pr&&!useDirect?" 🔒":""}</option>`).join("");
+ if(old&&models.some(m=>m.id===old))sel.value=old;
+ drawList();draw();
+}
+let fq="",fFav=false;
+function drawList(){
+ const q=fq.trim().toLowerCase(),d0=new Date().setHours(0,0,0,0);
+ const a=chats.filter(c=>(!fFav||c.fav)&&(!q||c.title.toLowerCase().includes(q)||c.msgs.some(m=>String(m.content).toLowerCase().includes(q))));
+ const grp=c=>c.fav&&!fFav?"★ Избранные":c.id>=d0?"Сегодня":c.id>=d0-864e5?"Вчера":c.id>=d0-6*864e5?"Последние 7 дней":"Ранее";
+ const order=["★ Избранные","Сегодня","Вчера","Последние 7 дней","Ранее"];let h="";
+ for(const g of order){const x=a.filter(c=>grp(c)===g);if(!x.length)continue;h+=`<div class="gr">${g}</div>`+x.map(c=>`<div class="it${c.id===cid?" on":""}" data-id="${c.id}"><span>${c.fav?"★ ":""}${esc(c.title)}</span><b class="dots" data-a="menu">⋯</b></div>`).join("")}
+ $("#list").innerHTML=h||`<p class="mut">${q?"Ничего не найдено":fFav?"Нет избранных чатов":"Чатов пока нет"}</p>`;
+}
+function draw(){
+ const c=cc(),ch=$("#chat");$("#sug").hidden=!!(c&&c.msgs.length);
+ if(!c||!c.msgs.length){
+  ch.innerHTML=`<div class="hero"><div class="ms">🌸</div><h1>OmniMind</h1><p>Бесплатный ИИ без ключей. Решает примеры и задачи по фото, пишет код, тексты и переводы.</p></div>`;return}
+ ch.innerHTML=c.msgs.map(m=>{
+  const im=m.img?`<img src="${m.img}" alt="">`:m.hadImg?"📷 (фото)<br>":"";
+  return m.role==="user"?`<div class="m u">${im}${fmt(m.content)}</div>`:`<div class="m a${m.err?" err":""}">${m.label?`<small>🌸 ${esc(m.label)}</small>`:""}${fmt(m.content)}</div>`}).join("");
+ ch.scrollTop=ch.scrollHeight;
+}
+$("#chat").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.p){$("#q").value=b.dataset.p;send()}if(b.dataset.m){$("#mode").value=b.dataset.m;$("#file").click()}};
+let mid=null;
+$("#list").onclick=e=>{const it=e.target.closest(".it");if(!it)return;const id=+it.dataset.id;
+ if(e.target.dataset.a==="menu"){e.stopPropagation();mid=id;const c=chats.find(x=>x.id===id),r=e.target.getBoundingClientRect(),m=$("#cm");m.querySelector("[data-a=fav]").textContent=c.fav?"★ Убрать из избранного":"☆ В избранное";m.hidden=false;m.style.left=Math.max(8,Math.min(r.left,innerWidth-200))+"px";m.style.top=Math.min(r.bottom+4,innerHeight-160)+"px";return}
+ cid=id;draw();drawList();$("#side").classList.remove("open")};
+$("#cm").onclick=e=>{const a=e.target.dataset.a,c=chats.find(x=>x.id===mid);$("#cm").hidden=true;if(!a||!c)return;
+ if(a==="fav"){c.fav=!c.fav;save();drawList()}
+ if(a==="ren"){const t=prompt("Название чата",c.title);if(t&&t.trim()){c.title=t.trim().slice(0,60);save();drawList()}}
+ if(a==="del"&&confirm("Удалить чат «"+c.title+"»?")){chats=chats.filter(x=>x.id!==c.id);if(cid===c.id)cid=chats[0]?chats[0].id:null;save();ui()}};
+document.addEventListener("click",e=>{if(!e.target.closest("#cm"))$("#cm").hidden=true;if(!e.target.closest("#bProf"))$("#pm").hidden=true});
+$("#bNew").onclick=()=>$("#nc").click();
+$("#sug").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.p){$("#q").value=b.dataset.p;send()}if(b.dataset.m){$("#mode").value=b.dataset.m;$("#file").click()}};
+{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(SR){let rec=null,on=false;$("#bMic").onclick=()=>{if(on){rec.stop();return}rec=new SR();rec.lang="ru-RU";rec.interimResults=true;const base=$("#q").value;rec.onresult=e=>{$("#q").value=(base?base+" ":"")+[...e.results].map(r=>r[0].transcript).join("");$("#q").dispatchEvent(new Event("input"))};rec.onstart=()=>{on=true;$("#bMic").classList.add("rec")};rec.onend=()=>{on=false;$("#bMic").classList.remove("rec")};rec.onerror=()=>{};rec.start()}}else $("#bMic").hidden=true}
+$("#srch").oninput=e=>{fq=e.target.value;drawList()};
+$("#tFav").onclick=()=>{fFav=!fFav;$("#tFav").classList.toggle("on",fFav);$("#tFav i").textContent=fFav?"★":"☆";drawList()};
+$("#bProf").onclick=e=>{e.stopPropagation();$("#cm").hidden=true;$("#pm").hidden=!$("#pm").hidden};
+$("#pm").addEventListener("click",()=>setTimeout(()=>{$("#pm").hidden=true}));
+$("#mProf").onclick=()=>{if(!cur())return openAuth();$("#pfE").textContent=ME.email;$("#pfP").textContent=ME.local?"Локальный аккаунт":ME.premium?"★ Premium":"Free";$("#pfU").textContent=ME.premium||ME.local?"без лимита":ME.used+" из "+ME.limit;$("#pfN").textContent=chats.length;dProf.showModal();$("#side").classList.remove("open")};
+$("#bCol").onclick=()=>{if(innerWidth>760)document.body.classList.add("side-c");else $("#side").classList.remove("open")};
+$("#bSet").onclick=()=>{$("#keyBox").hidden=true;$("#sKey").value=L("om_key","");$("#sMode").value=L("om_mode","chat");dSet.showModal();$("#side").classList.remove("open")};
+$("#sKey").onchange=e=>{S("om_key",e.target.value.trim());e.target.blur()};
+$("#sMode").onchange=e=>{S("om_mode",e.target.value);$("#mode").value=e.target.value};
+$("#sClr").onclick=()=>{if(!cur())return;if(confirm("Удалить ВСЕ чаты? Это нельзя отменить.")){chats=[];cid=null;save();ui();dSet.close()}};
+let tx=0;$("#side").addEventListener("touchstart",e=>tx=e.touches[0].clientX,{passive:true});$("#side").addEventListener("touchend",e=>{if(tx-e.changedTouches[0].clientX>60)$("#side").classList.remove("open")});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#side").classList.remove("open")});
+$("#nc").onclick=()=>{newChat();draw();drawList();$("#side").classList.remove("open")};
+$("#bMenu").onclick=()=>{if(innerWidth>760)document.body.classList.toggle("side-c");else $("#side").classList.toggle("open")};
+$("#shade").onclick=()=>$("#side").classList.remove("open");
+
+const lh=async(p,salt)=>{const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(p),"PBKDF2",false,["deriveBits"]);const b=await crypto.subtle.deriveBits({name:"PBKDF2",salt:new TextEncoder().encode(salt),iterations:100000,hash:"SHA-256"},k,256);return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")};
+function openAuth(){authMode="in";authUI();dAuth.showModal()}
+function authUI(){$("#aT").textContent=authMode==="in"?"Вход":"Регистрация";$("#aOk").textContent=authMode==="in"?"Войти":"Создать аккаунт";$("#aSw").textContent=authMode==="in"?"Регистрация":"Уже есть аккаунт";$("#aE").textContent=useDirect?"Аккаунт хранится только в этом браузере (без сервера)":""}
+$("#bAuth").onclick=async()=>{if(cur()){if(ME.local)localStorage.removeItem("om_lcur");else await api("logout",{method:"POST"});ME=null;chats=L("om_guest",[]);cid=chats[0]?chats[0].id:null;ui()}else openAuth()};
+$("#aSw").onclick=()=>{authMode=authMode==="in"?"up":"in";authUI()};
+$("#aOk").onclick=async()=>{
+ const e=norm($("#em").value),p=$("#pw").value;
+ if(!/^\S+@\S+\.\S+$/.test(e))return $("#aE").textContent="Неверный email";
+ if(p.length<6)return $("#aE").textContent="Пароль слишком короткий";
+ if(useDirect){try{const us=L("om_lusers",{}),salt=us[e]?us[e].s:[...crypto.getRandomValues(new Uint8Array(8))].join("-"),h=await lh(p,salt);
+  if(authMode==="up"){if(us[e])return $("#aE").textContent="Такой email уже есть";us[e]={s:salt,h};S("om_lusers",us)}
+  else if(!us[e]||us[e].h!==h)return $("#aE").textContent="Неверный email или пароль";
+  S("om_lcur",e);$("#pw").value="";dAuth.close();return load()}catch(x){return $("#aE").textContent="Браузер не поддерживает защищённое хранение. Откройте сайт по https."}}
+ $("#aOk").disabled=true;
+ try{const r=await api(authMode==="up"?"register":"login",{method:"POST",body:JSON.stringify({email:e,password:p})});const j=await r.json();
+  if(!r.ok)return $("#aE").textContent=j.error||"Ошибка";
+  $("#pw").value="";dAuth.close();await load()}catch(x){$("#aE").textContent="Нет связи с сервером"}finally{$("#aOk").disabled=false}
+};
+$("#pw").addEventListener("keydown",e=>{if(e.key==="Enter")$("#aOk").click()});
+$("#bPrem").onclick=()=>{if(!cur())return openAuth();$("#pE").textContent=isPrem()?"Premium уже активен ✓":"";$("#admBox").hidden=!(ME&&ME.admin);dPrem.showModal();$("#side").classList.remove("open")};
+const grant=async v=>{const em=norm($("#pEm").value);if(!em)return $("#pE").textContent="Введите email";try{const r=await api("admin/user",{method:"POST",body:JSON.stringify({email:em,premium:v})});const j=await r.json();$("#pE").textContent=r.ok?(v?"Premium выдан ✓ ":"Premium снят ✓ ")+em:(j.error||"Ошибка")}catch(e){$("#pE").textContent="Нет связи с сервером"}};
+$("#pGive").onclick=()=>grant(1);$("#pTake").onclick=()=>grant(0);
+function readImg(f){return new Promise(res=>{const r=new FileReader();r.onerror=()=>res(null);r.onload=()=>{const im=new Image();im.onerror=()=>res(null);im.onload=()=>{const k=Math.min(1,1024/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.8))};im.src=r.result};r.readAsDataURL(f)})}
+$("#file").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;img=await readImg(f);if(!img)return alert("Не удалось открыть фото. Попробуйте другой файл (JPG или PNG).");pv()};
+function pv(){$("#pv").innerHTML=img?`<img src="${img}" alt=""><button id="xi">✕</button>`:"";if(img)$("#xi").onclick=()=>{img=null;pv()}}
+
+const sleep=ms=>new Promise(o=>setTimeout(o,ms));
+const PM={openai:"openai/gpt-5.4-nano",claude:"anthropic/claude-sonnet-5",gemini:"google/gemini-2.5-flash",mistral:"mistral-large-latest",deepseek:"deepseek/deepseek-chat",llama:"meta-llama/llama-3.3-70b-instruct"};
+async function ask(model,msgs,onTok){
+ if(!window.puter){const er=new Error("Не загрузился сервис ИИ (Puter). Проверьте интернет и обновите страницу");er.fatal=true;throw er}
+ const mid=PM[model]||PM.openai,opt={model:mid,stream:true};
+ const tx=c=>Array.isArray(c)?c.filter(x=>x.type==="text").map(x=>x.text).join("\n"):c;
+ const lastM=msgs[msgs.length-1],imgPart=Array.isArray(lastM.content)?lastM.content.find(x=>x.type==="image_url"):null;
+ let resp;
+ try{
+  if(imgPart){
+   const hist=msgs.slice(0,-1).map(m=>m.role+": "+tx(m.content)).join("\n");
+   resp=await puter.ai.chat(hist+"\n\n"+tx(lastM.content),imgPart.image_url.url,opt);
+  }else resp=await puter.ai.chat(msgs.map(m=>({role:m.role,content:tx(m.content)})),opt);
+ }catch(e){throw perr(e)}
+ let full="";
+ try{
+  if(resp&&typeof resp[Symbol.asyncIterator]==="function"){
+   for await(const p of resp){if(ctl&&ctl.signal.aborted)break;const t=p&&p.text;if(t){full+=t;if(onTok)onTok(full)}}
+  }else{const m=resp&&resp.message&&resp.message.content;full=Array.isArray(m)?m.map(x=>x.text||"").join(""):(m||(typeof resp==="string"?resp:""));if(full&&onTok)onTok(full)}
+ }catch(e){if(!full)throw perr(e)}
+ if(full)return full;throw new Error("пусто");
+}
+function perr(e){const m=(e&&(e.error&&e.error.message||e.message||e.msg))||(typeof e==="string"?e:"ошибка"),c=String((e&&(e.code||(e.error&&e.error.code)))||"");const er=new Error(/auth|cancel|login|sign/i.test(m+c)?"Войдите в бесплатный аккаунт Puter в открывшемся окне и отправьте сообщение ещё раз":m);er.fatal=/auth|cancel|login|sign/i.test(m+c);return er}
+let busyAt=0,ctl=null,useDirect=true;const DIRECT="https://gen.pollinations.ai/v1/chat/completions",LEGACY="https://text.pollinations.ai/openai",POLL_KEY=""; // ← ВСТАВЬТЕ СЮДА ВАШ БЕСПЛАТНЫЙ КЛЮЧ pk_… (enter.pollinations.ai). Посетители его вводить не будут
+async function send(){
+ if(busy&&Date.now()-busyAt>90000)busy=false;
+ if(busy){$("#st").textContent="Подождите, ответ ещё идёт…";return}
+ const t=$("#q").value.trim();
+ if(!t&&!img){$("#st").textContent="Напишите сообщение";return}
+  const pr=isPrem(),mode=$("#mode").value;
+ if(mode==="cmp"&&!pr&&!useDirect){$("#mode").value="chat";$("#st").textContent="Сравнение 3 ИИ доступно в Premium";return $("#bPrem").click()}
+ let sel=models.find(m=>m.id===$("#model").value)||models[0];
+ if(!pr&&!useDirect&&sel.id!==models[0].id){sel=models[0];$("#model").value=sel.id}
+ if(!pr&&!useDirect&&cnt()>=(ME?FREE_LIMIT:5)){if(!cur()){$("#st").textContent="Лимит для гостей исчерпан — зарегистрируйтесь";return openAuth()}$("#st").textContent="Лимит на сегодня исчерпан — оформите Premium";return $("#bPrem").click()}
+ busy=true;busyAt=Date.now();ctl=new AbortController();$("#bSend").textContent="■";
+ try{
+  const c=cc()||newChat();
+  if(!c.msgs.length)c.title=(t||"Фото").slice(0,32);
+  const um={role:"user",content:t||"Реши задачу на фото",img};
+  c.msgs.push(um);$("#q").value="";$("#q").style.height="38px";img=null;pv();draw();drawList();
+  $("#st").textContent="Думаю…";
+  const sys={role:"system",content:SYS[mode==="cmp"?"chat":mode]};
+  const past=c.msgs.slice(0,-1).filter(m=>!m.err).slice(-6).map(m=>({role:m.role,content:(m.hadImg||m.img?"[фото] ":"")+m.content}));
+  const last=um.img?{role:"user",content:[{type:"text",text:um.content},{type:"image_url",image_url:{url:um.img}}]}:{role:"user",content:um.content};
+  const msgs=[sys,...past,last];
+  const vis=models.filter(x=>["openai","gemini","claude"].includes(x.id));
+  const targets=um.img?[models[0]]:mode==="cmp"?models.slice(0,3):[sel];
+  let ok=false;
+  for(const m of targets){
+   const am={role:"assistant",content:"…",label:m.n};c.msgs.push(am);draw();
+   const order=um.img?(vis.length?vis:[models[0]]):[m,...models.filter(x=>x.id!==m.id)].slice(0,3);
+   let raf=0,done=false;
+   for(const x of order){
+    am.label=x.n;
+    try{am.content=await ask(x.id,msgs,y=>{$("#st").textContent="";am.content=y;if(!raf)raf=requestAnimationFrame(()=>{raf=0;draw()})});done=true;break}
+    catch(e){if(ctl.signal.aborted){done=true;if(am.content==="…")am.content="(остановлено)";break}window._le=(e&&e.message)||String(e);if(e.fatal){am.content="⚠ "+e.message;am.err=1;am.label="";done=true;break}am.content="…";$("#st").textContent="Модель не ответила, пробую другую…";draw()}
+   }
+   if(done)ok=true;else{am.content="⚠ Все серверы сейчас заняты или нет интернета. Нажмите отправить ещё раз через минуту. Причина: "+(window._le||"?");am.err=1;am.label=""}
+   $("#st").textContent="";draw();
+  }
+  if(ok){if(cur())api("me").then(r=>r.ok&&r.json()).then(j=>{if(j)ME=j}).catch(()=>{});else if(!c.msgs[c.msgs.length-1].err)S("om_g_"+day(),cnt()+1)}
+ }catch(e){$("#st").textContent="Ошибка: "+(e&&e.message||e)}
+ finally{busy=false;$("#bSend").textContent="↑";ctl=null;if(!/^Ошибка/.test($("#st").textContent))$("#st").textContent="";try{save();ui()}catch(e){}}
+}
+$("#bSend").onclick=()=>{if(busy&&ctl)ctl.abort();else send()};
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&innerWidth>760){e.preventDefault();send()}});
+$("#q").addEventListener("input",e=>{e.target.style.height="38px";e.target.style.height=Math.min(140,e.target.scrollHeight)+"px"});
+
+fetch("https://gen.pollinations.ai/v1/models").then(r=>r.json()).then(j=>{j=(Array.isArray(j)?j:j.data||[]).map(m=>({...m,name:m.name||m.id}));
+ const a=j.filter(m=>m&&m.name&&!/audio|midi|unity|evil|roblox|bidara|rtist|image|tts/i.test(m.name)).map(m=>({n:String(m.description||m.name).split(" - ")[0].slice(0,26),id:m.name}));
+ const want=[["GPT","openai",/^openai/i],["Claude","claude",/claude/i],["Gemini","gemini",/gemini/i],["DeepSeek","deepseek",/deepseek/i],["Mistral","mistral",/mistral/i],["Llama","llama",/llama/i]];
+ const out=[];
+ for(const [n,id,re] of want){const f=a.find(x=>re.test(x.id));out.push({n,id:f?f.id:id})}
+ for(const x of a)if(!out.some(o=>o.id===x.id)&&out.length<10)out.push(x);
+ models=out;ui()}).catch(()=>{});
+window.addEventListener("error",e=>{const st=$("#st");if(st)st.textContent="Ошибка: "+e.message});
+{const m=L("om_mode","chat");if([...$("#mode").options].some(o=>o.value===m))$("#mode").value=m}
+load();ui();
+</script>
+</body>
+</html>
