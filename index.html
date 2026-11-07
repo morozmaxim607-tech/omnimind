@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OmniMind — ИИ-чат: Claude, GPT, Gemini и другие модели в одном месте</title>
+<meta name="description" content="OmniMind — бесплатный ИИ-чат, объединяющий Claude, ChatGPT, Gemini, DeepSeek и другие нейросети. Режим программиста, сравнение моделей, премиум-подписка.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://YOUR-SITE/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OmniMind — все лучшие ИИ в одном чате">
+<meta property="og:description" content="Claude, GPT, Gemini, DeepSeek в одном месте. Сравнивайте ответы нейросетей.">
+<meta property="og:url" content="https://YOUR-SITE/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OmniMind","url":"https://YOUR-SITE/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"ИИ-чат с несколькими нейросетями: Claude, GPT, Gemini, DeepSeek.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+:root{--bg:#0e1020;--card:#171a31;--line:#2a2e52;--tx:#e8eaf6;--mut:#8f94bd;--ac:#7c5cff;--ac2:#22d3ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,sans-serif}
+header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap;position:sticky;top:0;background:var(--bg);z-index:5}
+.logo{font-weight:800;font-size:20px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;color:transparent;margin-right:auto}
+button,select,input,textarea{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+button{cursor:pointer}button.p{background:linear-gradient(90deg,var(--ac),var(--ac2));border:0;color:#fff;font-weight:600}
+.badge{font-size:12px;padding:2px 8px;border-radius:99px;background:var(--line)}.badge.pr{background:#f5b301;color:#000}
+main{max-width:820px;margin:0 auto;padding:12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.bar select{flex:1;min-width:130px}
+#chat{min-height:45vh;display:flex;flex-direction:column;gap:10px;padding:6px 0}
+.m{padding:10px 14px;border-radius:14px;max-width:92%;white-space:pre-wrap;word-wrap:break-word}
+.u{align-self:flex-end;background:var(--ac)}.a{background:var(--card);border:1px solid var(--line)}
+.m small{display:block;color:var(--ac2);font-weight:600;margin-bottom:4px}
+pre{background:#0a0b16;padding:10px;border-radius:8px;overflow-x:auto;margin:6px 0}code{background:#0a0b16;padding:1px 5px;border-radius:4px}pre code{padding:0}
+.in{display:flex;gap:8px;position:sticky;bottom:0;background:var(--bg);padding:8px 0}.in textarea{flex:1;resize:none;height:52px}
+dialog{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:16px;max-width:380px;width:92%}
+dialog::backdrop{background:#000a}dialog input{width:100%;margin:6px 0}dialog h3{margin:0 0 8px}
+.row{display:flex;gap:8px;margin-top:8px}.row>*{flex:1}.mut{color:var(--mut);font-size:14px}a{color:var(--ac2)}
+section.seo{max-width:820px;margin:30px auto;padding:0 14px 40px;color:var(--mut)}section.seo h2{color:var(--tx);font-size:20px}
+</style>
+</head>
+<body>
+<header>
+ <span class="logo">OmniMind</span>
+ <span id="badge" class="badge"></span>
+ <button id="bAuth">Войти</button>
+ <button id="bPrem" class="p">★ Premium</button>
+ <button id="bSet" title="Настройки">⚙</button>
+</header>
+<main>
+ <div class="bar">
+  <select id="mode">
+   <option value="chat">💬 Обычный чат</option>
+   <option value="code">👨‍💻 Программист</option>
+   <option value="write">✍️ Писатель</option>
+   <option value="tr">🌍 Переводчик</option>
+   <option value="cmp">⚖️ Сравнить 3 модели (Premium)</option>
+  </select>
+  <select id="model"></select>
+  <button id="bClr">Очистить</button>
+ </div>
+ <div id="chat"></div>
+ <div class="in"><textarea id="q" placeholder="Спросите что угодно…"></textarea><button id="bSend" class="p">➤</button></div>
+ <p class="mut" id="lim"></p>
+</main>
+
+<dialog id="dAuth"><h3 id="aT">Вход</h3>
+ <input id="em" type="email" placeholder="Email" autocomplete="email">
+ <input id="pw" type="password" placeholder="Пароль (от 6 символов)" autocomplete="current-password">
+ <div class="row"><button class="p" id="aOk">Войти</button><button id="aSw">Регистрация</button></div>
+ <p class="mut" id="aE"></p><button onclick="dAuth.close()" style="width:100%">Закрыть</button></dialog>
+
+<dialog id="dPrem"><h3>★ Premium</h3>
+ <p class="mut">Все модели, сравнение 3 ИИ сразу, без лимита сообщений. Введите код владельца, чтобы выдать Premium себе.</p>
+ <input id="code" type="password" placeholder="Код владельца">
+ <div class="row"><button class="p" id="pOk">Активировать</button><button id="pOff">Отключить</button></div>
+ <p class="mut" id="pE"></p><button onclick="dPrem.close()" style="width:100%">Закрыть</button></dialog>
+
+<dialog id="dSet"><h3>Настройки</h3>
+ <p class="mut">Ключ OpenRouter (<a href="https://openrouter.ai/keys" target="_blank" rel="noopener">получить</a>) хранится только в вашем браузере.</p>
+ <input id="key" type="password" placeholder="sk-or-...">
+ <p class="mut">ID моделей (по одному в строке: название|id|premium 0/1)</p>
+ <textarea id="mods" rows="6" style="width:100%"></textarea>
+ <div class="row"><button class="p" id="sOk">Сохранить</button><button onclick="dSet.close()">Закрыть</button></div></dialog>
+
+<section class="seo">
+ <h2>OmniMind — все лучшие нейросети в одном чате</h2>
+ <p>OmniMind объединяет Claude, ChatGPT, Gemini, DeepSeek и другие модели искусственного интеллекта. Выбирайте модель, переключайтесь между режимами программиста, писателя и переводчика или сравнивайте ответы нескольких нейросетей одновременно.</p>
+ <h2>Тарифы</h2>
+ <p>Бесплатно: 10 сообщений в день и базовые модели. Premium: все модели, сравнение ответов, без лимитов.</p>
+</section>
+
+<script>
+const ADMIN_CODE="CHANGE-ME-2026"; // ← ЗАМЕНИТЕ на свой секретный код
+const FREE_LIMIT=10;
+const DEF_MODELS="DeepSeek|deepseek/deepseek-chat|0\nClaude Sonnet|anthropic/claude-sonnet-4.5|1\nGPT|openai/gpt-5|1\nGemini Pro|google/gemini-2.5-pro|1\nGrok|x-ai/grok-4|1";
+const SYS={chat:"Ты OmniMind — точный, дружелюбный ИИ-ассистент. Отвечай на языке пользователя.",
+code:"Ты эксперт-программист уровня senior. Пиши рабочий код, объясняй кратко, указывай подводные камни.",
+write:"Ты талантливый писатель и редактор. Пиши живо и грамотно.",
+tr:"Ты профессиональный переводчик. Переводи точно, сохраняя стиль; если язык не указан — между русским и английским."};
+const $=s=>document.querySelector(s);
+const L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const fmt=t=>esc(t).replace(/```\w*\n?([\s\S]*?)```/g,"<pre><code>$1</code></pre>").replace(/`([^`\n]+)`/g,"<code>$1</code>");
+let authMode="in",hist=[];
+const users=()=>L("om_users",{}),cur=()=>L("om_cur",null);
+const isPrem=()=>{const u=cur();return !!(u&&users()[u]&&users()[u].premium)};
+const day=()=>new Date().toISOString().slice(0,10);
+const cnt=()=>L("om_c_"+cur()+day(),0);
+const models=()=>(L("om_mods",DEF_MODELS)).split("\n").map(l=>l.split("|")).filter(a=>a[1]).map(a=>({n:a[0],id:a[1].trim(),p:a[2]==="1"}));
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("omnimind:"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+
+function ui(){
+ const u=cur(),pr=isPrem();
+ $("#bAuth").textContent=u?"Выйти":"Войти";
+ $("#badge").textContent=u?(pr?"★ Premium":"Free"):"";$("#badge").className="badge"+(pr?" pr":"");
+ $("#lim").textContent=!u?"Войдите, чтобы начать чат.":pr?"Premium: без лимитов.":`Осталось сообщений сегодня: ${Math.max(0,FREE_LIMIT-cnt())}`;
+ const sel=$("#model"),old=sel.value;
+ sel.innerHTML=models().map(m=>`<option value="${esc(m.id)}">${esc(m.n)}${m.p&&!pr?" 🔒":""}</option>`).join("");
+ if(old)sel.value=old;
+ hist=u?L("om_h_"+u,[]):[];draw();
+}
+function draw(){
+ $("#chat").innerHTML=hist.length?hist.map(m=>`<div class="m ${m.role==="user"?"u":"a"}">${m.label?`<small>${esc(m.label)}</small>`:""}${fmt(m.content)}</div>`).join(""):'<div class="m a">Привет! Я OmniMind. Выберите модель и режим — и спрашивайте что угодно: код, тексты, переводы, идеи.</div>';
+ window.scrollTo(0,document.body.scrollHeight);
+}
+const save=()=>{if(cur())S("om_h_"+cur(),hist.slice(-60))};
+
+$("#bAuth").onclick=()=>{if(cur()){localStorage.removeItem("om_cur");ui()}else{authMode="in";authUI();dAuth.showModal()}};
+function authUI(){$("#aT").textContent=authMode==="in"?"Вход":"Регистрация";$("#aOk").textContent=authMode==="in"?"Войти":"Создать аккаунт";$("#aSw").textContent=authMode==="in"?"Регистрация":"Уже есть аккаунт";$("#aE").textContent=""}
+$("#aSw").onclick=()=>{authMode=authMode==="in"?"up":"in";authUI()};
+$("#aOk").onclick=async()=>{
+ const e=$("#em").value.trim().toLowerCase(),p=$("#pw").value;
+ if(!/^\S+@\S+\.\S+$/.test(e))return $("#aE").textContent="Неверный email";
+ if(p.length<6)return $("#aE").textContent="Пароль слишком короткий";
+ const us=users(),h=await sha(p);
+ if(authMode==="up"){if(us[e])return $("#aE").textContent="Такой email уже есть";us[e]={h,premium:false};S("om_users",us)}
+ else if(!us[e]||us[e].h!==h)return $("#aE").textContent="Неверный email или пароль";
+ S("om_cur",e);$("#pw").value="";dAuth.close();ui();
+};
+$("#bPrem").onclick=()=>{$("#pE").textContent=isPrem()?"Premium уже активен ✓":"";if(!cur()){authMode="in";authUI();return dAuth.showModal()}dPrem.showModal()};
+$("#pOk").onclick=()=>{if($("#code").value!==ADMIN_CODE)return $("#pE").textContent="Неверный код";const us=users();us[cur()].premium=true;S("om_users",us);$("#code").value="";$("#pE").textContent="Premium активирован ✓";ui()};
+$("#pOff").onclick=()=>{const us=users();if(cur()&&us[cur()]){us[cur()].premium=false;S("om_users",us);ui();$("#pE").textContent="Premium отключён"}};
+$("#bSet").onclick=()=>{$("#key").value=localStorage.getItem("om_key")||"";$("#mods").value=L("om_mods",DEF_MODELS);dSet.showModal()};
+$("#sOk").onclick=()=>{localStorage.setItem("om_key",$("#key").value.trim());S("om_mods",$("#mods").value);dSet.close();ui()};
+$("#bClr").onclick=()=>{hist=[];save();draw()};
+
+async function ask(model,msgs){
+ const r=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("om_key"),"X-Title":"OmniMind"},body:JSON.stringify({model,messages:msgs})});
+ if(!r.ok)throw new Error((await r.text()).slice(0,200));
+ const j=await r.json();return j.choices?.[0]?.message?.content||"(пустой ответ)";
+}
+async function send(){
+ const t=$("#q").value.trim();if(!t)return;
+ if(!cur()){authMode="in";authUI();return dAuth.showModal()}
+ if(!localStorage.getItem("om_key"))return $("#bSet").click();
+ const pr=isPrem(),mode=$("#mode").value,ms=models(),sel=ms.find(m=>m.id===$("#model").value)||ms[0];
+ if(mode==="cmp"&&!pr)return $("#bPrem").click();
+ if(!pr&&sel.p)return $("#bPrem").click();
+ if(!pr&&cnt()>=FREE_LIMIT){$("#lim").textContent="Лимит на сегодня исчерпан. Оформите Premium.";return $("#bPrem").click()}
+ $("#q").value="";hist.push({role:"user",content:t});draw();
+ if(!pr)S("om_c_"+cur()+day(),cnt()+1);
+ const ctx=hist.filter(m=>!m.err).slice(-12).map(m=>({role:m.role,content:m.content}));
+ const msgs=[{role:"system",content:SYS[mode==="cmp"?"chat":mode]},...ctx];
+ const targets=mode==="cmp"?ms.slice(0,3):[sel];
+ $("#bSend").disabled=true;
+ await Promise.all(targets.map(async m=>{
+  try{hist.push({role:"assistant",content:await ask(m.id,msgs),label:m.n})}
+  catch(e){hist.push({role:"assistant",content:"⚠ Ошибка: "+e.message,label:m.n,err:1})}
+  draw()}));
+ $("#bSend").disabled=false;save();ui();
+}
+$("#bSend").onclick=send;
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}});
+ui();
+</script>
+</body>
+</html>
