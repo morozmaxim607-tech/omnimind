@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OmniMind — бесплатный ИИ-чат с фото: решает задачи, пишет код</title>
+<meta name="description" content="OmniMind — бесплатный ИИ-чат без ключей. Решает примеры по фото, пишет код, тексты и переводы. Несколько нейросетей, режим сравнения, Premium.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://morozmaxim607-tech.github.io/omnimind/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OmniMind — ИИ-чат, который решает задачи по фото">
+<meta property="og:description" content="Бесплатный ИИ без ключей: код, математика по фото, тексты, переводы.">
+<meta property="og:url" content="https://morozmaxim607-tech.github.io/omnimind/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OmniMind","url":"https://morozmaxim607-tech.github.io/omnimind/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Бесплатный ИИ-чат: решает задачи по фото, пишет код и тексты.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+:root{--pk:#ff7ac6;--cy:#7df3ff;--lv:#b08cff;--tx:#fff;--mut:#c9b8f0;--gl:rgba(255,255,255,.09);--ln:rgba(255,255,255,.18)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{color:var(--tx);font:16px/1.5 system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 15% 10%,#6b2d9c55,transparent 45%),radial-gradient(circle at 90% 90%,#ff7ac644,transparent 40%),linear-gradient(160deg,#1a1033,#261552 60%,#1b1240);overflow:hidden}
+button,select,textarea,input{font:inherit;color:var(--tx);background:var(--gl);border:1px solid var(--ln);border-radius:14px;padding:9px 13px}
+button{cursor:pointer}option{color:#000}
+.p{background:linear-gradient(90deg,var(--pk),var(--lv));border:0;font-weight:700;box-shadow:0 0 16px #ff7ac655}
+#app{display:flex;height:100dvh}
+#side{width:280px;flex:none;display:flex;flex-direction:column;gap:10px;padding:14px;background:#140b2df0;border-right:1px solid var(--ln)}
+.brand{font-weight:800;font-size:22px;background:linear-gradient(90deg,var(--pk),var(--cy));-webkit-background-clip:text;color:transparent}
+#list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+.it{display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:12px;cursor:pointer;color:var(--mut);font-size:15px}
+.it span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.it:hover,.it.on{background:var(--gl);color:#fff}
+.it b{opacity:.6;font-weight:400;padding:0 4px}
+.foot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--ln);padding-top:10px}
+#who{font-size:14px;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+#main{flex:1;min-width:0;display:flex;flex-direction:column;height:100dvh}
+.top{display:flex;gap:8px;padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top));align-items:center}
+.top select{flex:1;min-width:0}#bMenu{display:none}
+#chat{flex:1;overflow-y:auto;padding:8px 14px;display:flex;flex-direction:column;gap:14px;max-width:860px;width:100%;margin:0 auto}
+.m{max-width:88%;padding:11px 15px;border-radius:18px;white-space:pre-wrap;word-wrap:break-word}
+.u{align-self:flex-end;background:linear-gradient(135deg,var(--pk),var(--lv));border-bottom-right-radius:6px}
+.a{align-self:flex-start;background:var(--gl);border:1px solid var(--ln);border-bottom-left-radius:6px}
+.a small{display:block;color:var(--cy);font-weight:700;margin-bottom:3px}.err{border-color:#ff6b8a}
+.m img{max-width:100%;max-height:260px;border-radius:12px;display:block;margin-bottom:6px}
+pre{background:#0c0720;padding:10px;border-radius:10px;overflow-x:auto;margin:6px 0}code{background:#0c072099;padding:1px 5px;border-radius:5px}pre code{background:none;padding:0}
+.hero{margin:auto;text-align:center;padding:20px;max-width:520px}
+.hero .ms{font-size:64px;filter:drop-shadow(0 0 18px var(--pk))}
+.hero h1{margin:4px 0;font-size:34px;background:linear-gradient(90deg,var(--pk),var(--cy));-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--mut)}.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}.chips button{font-size:14px}
+#st{text-align:center;color:var(--cy);font-size:14px;min-height:18px}
+#pv{max-width:860px;width:100%;margin:0 auto;padding:0 14px}#pv img{height:64px;border-radius:10px;border:2px solid var(--pk)}#pv button{padding:2px 9px;margin-left:6px}
+.in{display:flex;gap:8px;max-width:860px;width:100%;margin:0 auto;padding:6px 14px;padding-bottom:max(12px,env(safe-area-inset-bottom));align-items:flex-end}
+.in textarea{flex:1;resize:none;height:50px;max-height:140px;border-radius:22px}
+.in label,.in button{height:50px;min-width:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0;cursor:pointer;background:var(--gl);border:1px solid var(--ln)}
+.in .p{border:0;background:linear-gradient(135deg,var(--pk),var(--lv))}
+dialog{background:#241447;color:#fff;border:1px solid var(--ln);border-radius:20px;max-width:380px;width:92%;box-shadow:0 0 40px #ff7ac655}
+dialog::backdrop{background:#000b}dialog input{width:100%;margin:6px 0}dialog h3{margin:0 0 8px}
+.row{display:flex;gap:8px;margin:8px 0}.row>*{flex:1}.mut{color:var(--mut);font-size:14px}
+#shade{display:none}
+@media(max-width:760px){
+ #side{position:fixed;z-index:20;left:0;top:0;bottom:0;transform:translateX(-102%);transition:.25s;width:82%;max-width:320px}
+ #side.open{transform:none}#side.open+#shade{display:block;position:fixed;inset:0;background:#0009;z-index:15}
+ #bMenu{display:block}.m{max-width:94%}}
+</style>
+</head>
+<body>
+<div id="app">
+ <aside id="side">
+  <div class="brand">🌸 OmniMind</div>
+  <button id="nc" class="p">＋ Новый чат</button>
+  <div id="list"></div>
+  <div class="foot"><div id="who"></div><button id="bPrem">★ Premium</button><button id="bAuth">Войти</button></div>
+ </aside>
+ <div id="shade"></div>
+ <section id="main">
+  <div class="top">
+   <button id="bMenu">☰</button>
+   <select id="model"></select>
+   <select id="mode">
+    <option value="chat">💬 Чат</option><option value="math">🧮 Решатель задач</option><option value="code">👨‍💻 Программист</option>
+    <option value="write">✍️ Писатель</option><option value="tr">🌍 Переводчик</option><option value="cmp">⚖️ Сравнить 3 ИИ ★</option>
+   </select>
+  </div>
+  <div id="chat"></div>
+  <div id="st"></div>
+  <div id="pv"></div>
+  <div class="in">
+   <label for="file" title="Добавить фото">📎</label><input type="file" id="file" accept="image/*" hidden>
+   <textarea id="q" placeholder="Напишите сообщение или добавьте фото задачи…"></textarea>
+   <button id="bSend" class="p">➤</button>
+  </div>
+ </section>
+</div>
+
+<dialog id="dAuth"><h3 id="aT">Вход</h3>
+ <input id="em" type="email" placeholder="Email" autocomplete="email" autocapitalize="off" autocorrect="off">
+ <input id="pw" type="password" placeholder="Пароль (от 6 символов)" autocomplete="current-password">
+ <div class="row"><button class="p" id="aOk">Войти</button><button id="aSw">Регистрация</button></div>
+ <p class="mut" id="aE"></p><button onclick="dAuth.close()" style="width:100%">Закрыть</button></dialog>
+
+<dialog id="dPrem"><h3>★ Premium</h3>
+ <p class="mut">Все нейросети, сравнение 3 ИИ сразу, без лимита сообщений. Введите код владельца, чтобы выдать Premium себе.</p>
+ <input id="code" type="password" placeholder="Код владельца" autocapitalize="off" autocorrect="off">
+ <div class="row"><button class="p" id="pOk">Активировать</button><button id="pOff">Отключить</button></div>
+ <p class="mut" id="pE"></p><button onclick="dPrem.close()" style="width:100%">Закрыть</button></dialog>
+
+<noscript>OmniMind — бесплатный ИИ-чат: несколько нейросетей, решение задач по фото, код, тексты и переводы. Включите JavaScript.</noscript>
+
+<script>
+const ADMIN_CODE="omnimind2026"; // ← замените на свой код (маленькие буквы и цифры)
+const FREE_LIMIT=10;
+const SYS={chat:"Ты OmniMind — умный, дружелюбный ИИ-ассистент. Отвечай на языке пользователя, чётко и кратко.",
+math:"Ты репетитор по математике, физике и другим наукам. Если на фото задача — прочитай её и реши по шагам, в конце напиши ответ. Формулы пиши простым текстом (без LaTeX).",
+code:"Ты эксперт-программист уровня senior. Пиши рабочий код в блоках ```, объясняй кратко, указывай подводные камни.",
+write:"Ты талантливый писатель и редактор. Пиши живо, грамотно и красиво.",
+tr:"Ты профессиональный переводчик. Переводи точно, сохраняя стиль; если язык не указан — между русским и английским."};
+let models=[{n:"GPT",id:"openai"},{n:"Mistral",id:"mistral"},{n:"Llama",id:"llama"},{n:"DeepSeek",id:"deepseek"},{n:"Claude",id:"claude"},{n:"Gemini",id:"gemini"}];
+const $=s=>document.querySelector(s);
+const L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const fmt=t=>esc(t).replace(/```\w*\n?([\s\S]*?)```/g,"<pre><code>$1</code></pre>").replace(/`([^`\n]+)`/g,"<code>$1</code>").replace(/\*\*([^*\n]+)\*\*/g,"<b>$1</b>");
+const norm=s=>String(s).trim().toLowerCase();
+const users=()=>L("om_users",{}),cur=()=>L("om_cur",null);
+const isPrem=()=>{const u=cur();return !!(u&&users()[u]&&users()[u].premium)};
+const day=()=>new Date().toISOString().slice(0,10);
+const cnt=()=>L("om_c_"+cur()+day(),0);
+let authMode="in",chats=[],cid=null,img=null,busy=false;
+const cc=()=>chats.find(c=>c.id===cid);
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("omnimind:"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+
+function load(){chats=cur()?L("om_ch_"+cur(),[]):[];cid=chats[0]?chats[0].id:null}
+function save(){if(!cur())return;S("om_ch_"+cur(),chats.slice(0,40).map(c=>({...c,msgs:c.msgs.slice(-60).map(m=>m.img?{...m,img:null,hadImg:1}:m)})))}
+function newChat(){const c={id:Date.now(),title:"Новый чат",msgs:[]};chats.unshift(c);cid=c.id;return c}
+
+function ui(){
+ const u=cur(),pr=isPrem();
+ $("#who").textContent=u?(pr?"★ Premium · ":"Free · ")+u:"Вы не вошли";
+ $("#bAuth").textContent=u?"Выйти":"Войти";
+ $("#bPrem").textContent=pr?"★ Premium активен":"★ Premium";
+ const sel=$("#model"),old=sel.value;
+ sel.innerHTML=models.map((m,i)=>`<option value="${esc(m.id)}">${esc(m.n)}${i>0&&!pr?" 🔒":""}</option>`).join("");
+ if(old&&models.some(m=>m.id===old))sel.value=old;
+ drawList();draw();
+}
+function drawList(){
+ $("#list").innerHTML=chats.map(c=>`<div class="it${c.id===cid?" on":""}" data-id="${c.id}"><span>💬 ${esc(c.title)}</span><b data-del="${c.id}">✕</b></div>`).join("")||'<p class="mut">Чатов пока нет</p>';
+}
+function draw(){
+ const c=cc(),ch=$("#chat");
+ if(!c||!c.msgs.length){
+  ch.innerHTML=`<div class="hero"><div class="ms">🌸</div><h1>OmniMind</h1><p>Бесплатный ИИ без ключей. Решает примеры и задачи по фото, пишет код, тексты и переводы.</p><div class="chips"><button data-p="Объясни простыми словами, как работает интернет">🌐 Как работает интернет</button><button data-p="Напиши на Python игру «Угадай число»">🐍 Игра на Python</button><button data-p="Придумай 5 идей для стартапа">💡 Идеи</button><button data-m="math">📷 Реши задачу по фото</button></div></div>`;return}
+ ch.innerHTML=c.msgs.map(m=>{
+  const im=m.img?`<img src="${m.img}" alt="">`:m.hadImg?"📷 (фото)<br>":"";
+  return m.role==="user"?`<div class="m u">${im}${fmt(m.content)}</div>`:`<div class="m a${m.err?" err":""}">${m.label?`<small>🌸 ${esc(m.label)}</small>`:""}${fmt(m.content)}</div>`}).join("");
+ ch.scrollTop=ch.scrollHeight;
+}
+$("#chat").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.p){$("#q").value=b.dataset.p;send()}if(b.dataset.m){$("#mode").value=b.dataset.m;$("#file").click()}};
+$("#list").onclick=e=>{
+ const d=e.target.dataset.del;if(d){chats=chats.filter(c=>c.id!=d);if(cid==d)cid=chats[0]?chats[0].id:null;save();return ui()}
+ const it=e.target.closest(".it");if(it){cid=+it.dataset.id;draw();drawList();$("#side").classList.remove("open")}};
+$("#nc").onclick=()=>{if(!cur())return openAuth();newChat();draw();drawList();$("#side").classList.remove("open")};
+$("#bMenu").onclick=()=>$("#side").classList.toggle("open");
+$("#shade").onclick=()=>$("#side").classList.remove("open");
+
+function openAuth(){authMode="in";authUI();dAuth.showModal()}
+function authUI(){$("#aT").textContent=authMode==="in"?"Вход":"Регистрация";$("#aOk").textContent=authMode==="in"?"Войти":"Создать аккаунт";$("#aSw").textContent=authMode==="in"?"Регистрация":"Уже есть аккаунт";$("#aE").textContent=""}
+$("#bAuth").onclick=()=>{if(cur()){localStorage.removeItem("om_cur");load();ui()}else openAuth()};
+$("#aSw").onclick=()=>{authMode=authMode==="in"?"up":"in";authUI()};
+$("#aOk").onclick=async()=>{
+ const e=norm($("#em").value),p=$("#pw").value;
+ if(!/^\S+@\S+\.\S+$/.test(e))return $("#aE").textContent="Неверный email";
+ if(p.length<6)return $("#aE").textContent="Пароль слишком короткий";
+ const us=users(),h=await sha(p);
+ if(authMode==="up"){if(us[e])return $("#aE").textContent="Такой email уже есть";us[e]={h,premium:false};S("om_users",us)}
+ else if(!us[e]||us[e].h!==h)return $("#aE").textContent="Неверный email или пароль";
+ S("om_cur",e);$("#pw").value="";dAuth.close();load();ui();
+};
+$("#pw").addEventListener("keydown",e=>{if(e.key==="Enter")$("#aOk").click()});
+$("#bPrem").onclick=()=>{if(!cur())return openAuth();$("#pE").textContent=isPrem()?"Premium уже активен ✓":"";dPrem.showModal();$("#side").classList.remove("open")};
+$("#pOk").onclick=()=>{if(norm($("#code").value)!==norm(ADMIN_CODE))return $("#pE").textContent="Неверный код";const us=users();us[cur()].premium=true;S("om_users",us);$("#code").value="";$("#pE").textContent="Premium активирован ✓";ui()};
+$("#pOff").onclick=()=>{const us=users();if(cur()&&us[cur()]){us[cur()].premium=false;S("om_users",us);ui();$("#pE").textContent="Premium отключён"}};
+
+function readImg(f){return new Promise(res=>{const r=new FileReader();r.onerror=()=>res(null);r.onload=()=>{const im=new Image();im.onerror=()=>res(null);im.onload=()=>{const k=Math.min(1,1024/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.8))};im.src=r.result};r.readAsDataURL(f)})}
+$("#file").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;img=await readImg(f);if(!img)return alert("Не удалось открыть фото. Попробуйте другой файл (JPG или PNG).");pv()};
+function pv(){$("#pv").innerHTML=img?`<img src="${img}" alt=""><button id="xi">✕</button>`:"";if(img)$("#xi").onclick=()=>{img=null;pv()}}
+
+const sleep=ms=>new Promise(o=>setTimeout(o,ms));
+async function ask(model,msgs,onTok){
+ const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),20000);
+ let r;
+ try{r=await fetch("https://text.pollinations.ai/openai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model,messages:msgs,stream:true}),signal:ac.signal})}
+ catch(e){clearTimeout(tm);throw new Error("нет ответа")}
+ clearTimeout(tm);
+ if(!r.ok)throw new Error("код "+r.status);
+ const ct=r.headers.get("content-type")||"";
+ if(r.body&&ct.includes("event-stream")){
+  const rd=r.body.getReader(),dc=new TextDecoder();let buf="",full="";
+  try{
+   for(;;){
+    const {done,value}=await Promise.race([rd.read(),new Promise((_,j)=>setTimeout(()=>j(new Error("завис")),15000))]);
+    if(done)break;
+    buf+=dc.decode(value,{stream:true});const ls=buf.split("\n");buf=ls.pop();
+    for(const l of ls){if(!l.startsWith("data:"))continue;const d=l.slice(5).trim();if(!d||d==="[DONE]")continue;
+     try{const x=JSON.parse(d).choices?.[0]?.delta?.content;if(x){full+=x;if(onTok)onTok(full)}}catch(e){}}
+   }
+  }catch(e){if(!full)throw e}
+  if(full)return full;throw new Error("пусто");
+ }
+ const tx=await r.text();
+ try{const j=JSON.parse(tx);const x=j.choices?.[0]?.message?.content;if(x)return x}catch(e){if(tx.trim())return tx}
+ throw new Error("пусто");
+}
+let busyAt=0;
+async function send(){
+ if(busy&&Date.now()-busyAt>90000)busy=false;
+ if(busy){$("#st").textContent="Подождите, ответ ещё идёт…";return}
+ const t=$("#q").value.trim();
+ if(!t&&!img){$("#st").textContent="Напишите сообщение";return}
+ if(!cur()){$("#st").textContent="Сначала войдите в аккаунт";return openAuth()}
+ const pr=isPrem(),mode=$("#mode").value;
+ if(mode==="cmp"&&!pr){$("#mode").value="chat";$("#st").textContent="Сравнение 3 ИИ доступно в Premium";return $("#bPrem").click()}
+ let sel=models.find(m=>m.id===$("#model").value)||models[0];
+ if(!pr&&sel.id!==models[0].id){sel=models[0];$("#model").value=sel.id}
+ if(!pr&&cnt()>=FREE_LIMIT){$("#st").textContent="Лимит на сегодня исчерпан — оформите Premium";return $("#bPrem").click()}
+ busy=true;busyAt=Date.now();$("#bSend").disabled=true;
+ try{
+  const c=cc()||newChat();
+  if(!c.msgs.length)c.title=(t||"Фото").slice(0,32);
+  const um={role:"user",content:t||"Реши задачу на фото",img};
+  c.msgs.push(um);$("#q").value="";$("#q").style.height="50px";img=null;pv();draw();drawList();
+  $("#st").textContent="Думаю…";
+  const sys={role:"system",content:SYS[mode==="cmp"?"chat":mode]};
+  const past=c.msgs.slice(0,-1).filter(m=>!m.err).slice(-6).map(m=>({role:m.role,content:(m.hadImg||m.img?"[фото] ":"")+m.content}));
+  const last=um.img?{role:"user",content:[{type:"text",text:um.content},{type:"image_url",image_url:{url:um.img}}]}:{role:"user",content:um.content};
+  const msgs=[sys,...past,last];
+  const vis=models.filter(x=>["openai","gemini","claude"].includes(x.id));
+  const targets=um.img?[models[0]]:mode==="cmp"?models.slice(0,3):[sel];
+  let ok=false;
+  for(const m of targets){
+   const am={role:"assistant",content:"…",label:m.n};c.msgs.push(am);draw();
+   const order=um.img?(vis.length?vis:[models[0]]):[m,...models.filter(x=>x.id!==m.id)].slice(0,3);
+   let raf=0,done=false;
+   for(const x of order){
+    am.label=x.n;
+    try{am.content=await ask(x.id,msgs,y=>{$("#st").textContent="";am.content=y;if(!raf)raf=requestAnimationFrame(()=>{raf=0;draw()})});done=true;break}
+    catch(e){am.content="…";$("#st").textContent="Модель не ответила, пробую другую…";draw()}
+   }
+   if(done)ok=true;else{am.content="⚠ Все серверы сейчас заняты или нет интернета. Нажмите отправить ещё раз через минуту.";am.err=1;am.label=""}
+   $("#st").textContent="";draw();
+  }
+  if(ok&&!pr)S("om_c_"+cur()+day(),cnt()+1);
+ }catch(e){$("#st").textContent="Ошибка: "+(e&&e.message||e)}
+ finally{busy=false;$("#bSend").disabled=false;if(!/^Ошибка/.test($("#st").textContent))$("#st").textContent="";try{save();ui()}catch(e){}}
+}
+$("#bSend").onclick=send;
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&innerWidth>760){e.preventDefault();send()}});
+$("#q").addEventListener("input",e=>{e.target.style.height="50px";e.target.style.height=Math.min(140,e.target.scrollHeight)+"px"});
+
+fetch("https://text.pollinations.ai/models").then(r=>r.json()).then(j=>{
+ const a=j.filter(m=>m&&m.name&&!/audio|midi|unity|evil|roblox|bidara|rtist|image|tts/i.test(m.name)).map(m=>({n:String(m.description||m.name).split(" - ")[0].slice(0,26),id:m.name}));
+ const want=[["GPT","openai",/^openai/i],["Claude","claude",/claude/i],["Gemini","gemini",/gemini/i],["DeepSeek","deepseek",/deepseek/i],["Mistral","mistral",/mistral/i],["Llama","llama",/llama/i]];
+ const out=[];
+ for(const [n,id,re] of want){const f=a.find(x=>re.test(x.id));out.push({n,id:f?f.id:id})}
+ for(const x of a)if(!out.some(o=>o.id===x.id)&&out.length<10)out.push(x);
+ models=out;ui()}).catch(()=>{});
+window.addEventListener("error",e=>{const st=$("#st");if(st)st.textContent="Ошибка: "+e.message});
+load();ui();
+</script>
+</body>
+</html>
